@@ -7,11 +7,10 @@ import java.util.Map;
 import org.pcap4j.core.*;
 
 public class Interfaces {
-    Map<Integer, PcapNetworkInterface> availableInterfaces;
-    GUI referenceGUI;
+    private Map<Integer, PcapNetworkInterface> availableInterfaces;
+    private Integer currentInterface = null;
 
     public Interfaces(){
-
         availableInterfaces = new HashMap<>();
 
         List<PcapNetworkInterface> interfaces = findInterfaces();
@@ -35,10 +34,11 @@ public class Interfaces {
 
     }
 
-
     public Map<Integer, PcapNetworkInterface> getInterfaces(){ return availableInterfaces; }
-    public void setReferenceGUI(GUI ref){
-        referenceGUI = ref;
-        ref.updateInterfaces();
+    public void setCurrentInterface(int selection) {currentInterface = selection; }
+    public int getCurrentInterface() {return currentInterface;}
+    public PcapNetworkInterface getCurrentInterfaceObject(){
+        return availableInterfaces.get(currentInterface);
     }
+
 }
